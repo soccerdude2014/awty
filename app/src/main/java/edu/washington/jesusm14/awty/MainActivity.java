@@ -39,10 +39,11 @@ public class MainActivity extends Activity {
                 if(TextUtils.isEmpty(messageEdit.getText().toString())) {
                     Toast.makeText(MainActivity.this, "Application can't start: Missing message text ", Toast.LENGTH_SHORT).show();
                     return;
-                } else if(TextUtils.isEmpty(phoneNumberEdit.getText().toString())) {
-                    Toast.makeText(MainActivity.this, "Application can't start: Missing Phone Number ", Toast.LENGTH_SHORT).show();
+                } else if(TextUtils.isEmpty(phoneNumberEdit.getText().toString()) || phoneNumberEdit.getText().toString().length() > 11 ||
+                        phoneNumberEdit.getText().toString().length() < 10) {
+                    Toast.makeText(MainActivity.this, "Application can't start: Missing/Incorrect Phone Number ", Toast.LENGTH_SHORT).show();
                     return;
-                } else if(TextUtils.isEmpty(intervalEdit.getText().toString())) {
+                } else if(TextUtils.isEmpty(intervalEdit.getText().toString()))  {
                     Toast.makeText(MainActivity.this, "Application can't start: Missing interval ", Toast.LENGTH_SHORT).show();
                     return;
                 }  else if (Integer.parseInt(intervalEdit.getText().toString()) < 1) {
@@ -55,7 +56,7 @@ public class MainActivity extends Activity {
                         intent = new Intent(context, AlarmReceiver.class);
                         intent.putExtra("message", messageEdit.getText().toString());
                         intent.putExtra("phone_number", phoneNumberEdit.getText().toString());
-                        pIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                        pIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
                         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,Integer.parseInt(intervalEdit.getText().toString()) * 60000,Integer.parseInt(intervalEdit.getText().toString()) * 60000,
                                 pIntent);
                         button.setText("Stop");
