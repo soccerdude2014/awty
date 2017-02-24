@@ -23,7 +23,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         String message = intent.getStringExtra("message");
         String formattedNumber = "(" + number.substring(0, 3) + ") " + number.substring(3, 6) + "-" + number.substring(6);
         Toast.makeText(context, formattedNumber + ": " + message, Toast.LENGTH_SHORT).show();
-        //SmsManager smsManager = SmsManager.getDefault();
-        //smsManager.sendTextMessage(number, null, message, null, null);
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number, null, message, null, null);
     }
 }

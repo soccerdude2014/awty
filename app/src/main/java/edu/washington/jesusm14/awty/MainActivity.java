@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
 
         messageEdit = (EditText) findViewById(R.id.message_id);
         phoneNumberEdit = (EditText) findViewById(R.id.phone_id);
