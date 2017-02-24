@@ -1,11 +1,13 @@
 package edu.washington.jesusm14.awty;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
 
         messageEdit = (EditText) findViewById(R.id.message_id);
         phoneNumberEdit = (EditText) findViewById(R.id.phone_id);
@@ -57,7 +60,7 @@ public class MainActivity extends Activity {
                         intent.putExtra("message", messageEdit.getText().toString());
                         intent.putExtra("phone_number", phoneNumberEdit.getText().toString());
                         pIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,Integer.parseInt(intervalEdit.getText().toString()) * 60000,Integer.parseInt(intervalEdit.getText().toString()) * 60000,
+                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,System.currentTimeMillis(),Integer.parseInt(intervalEdit.getText().toString()) * 60000,
                                 pIntent);
                         button.setText("Stop");
                     } else {
