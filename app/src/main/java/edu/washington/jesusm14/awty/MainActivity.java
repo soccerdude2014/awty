@@ -73,4 +73,11 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        if(alarmManager != null) {
+            alarmManager.cancel(pIntent);
+        }
+    }
 }
